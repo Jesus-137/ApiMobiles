@@ -1,24 +1,27 @@
 import { Request, Response } from "express";
 
-import { GetByIdProductUseCase } from "../../application/GetByIdProductUseCase";
+import { GetByIdClienteUseCase } from "../../application/GetByIdClienteUseCase";
 
-export class GetByIdProductController {
-  constructor(readonly getByIdProductUseCase: GetByIdProductUseCase) {}
+export class GetByIdClienteController {
+  constructor(readonly getByIdClienteUseCase: GetByIdClienteUseCase) {}
 
   async run(req: Request, res: Response) {
     const id: number = parseInt(req.params.id);
     try {
-      const product = await this.getByIdProductUseCase.run(id);
+      const cliente = await this.getByIdClienteUseCase.run(id);
 
-      if (product)
+      if (cliente)
         //Code HTTP : 200 -> Consulta exitosa
         res.status(200).send({
           status: "success",
           data: {
-            id: product.id,
-            name: product.name,
-            description: product.description,
-            price: product.price,
+            id: cliente.id,
+            nombre: cliente.nombre,
+            telefono: cliente.telefono,
+            invitados: cliente.invitados,
+            fecha: cliente.fecha,
+            evento: cliente.evento,
+            paquete: cliente.paquete
           },
         });
       else
