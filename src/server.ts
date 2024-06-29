@@ -6,7 +6,7 @@ const bucketName = process.env.AWS_S3_BUCKET_NAME;
 console.log(`Bucket Name: ${bucketName}`);  // Debe imprimir el nombre de tu bucket
 
 const app = express();
-const signale = new Signale();
+const signale = new Signale()
 
 app.use(express.json());
 app.use((req, res, next) => {
