@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetByIdClienteUseCase } from "../../application/GetByIdClienteUseCase";
+import { GetByIdClienteUseCase } from "../../application/DeliteUseCase";
 
 export class GetByIdClienteController {
   constructor(readonly getByIdClienteUseCase: GetByIdClienteUseCase) {}
@@ -14,15 +14,7 @@ export class GetByIdClienteController {
         //Code HTTP : 200 -> Consulta exitosa
         res.status(200).send({
           status: "success",
-          data: {
-            id: cliente.id,
-            nombre: cliente.nombre,
-            telefono: cliente.telefono,
-            invitados: cliente.invitados,
-            fecha: cliente.fecha,
-            evento: cliente.evento,
-            paquete: cliente.paquete
-          },
+          data: cliente,
         });
       else
         res.status(400).send({

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetAllClientesUseCase } from "../../application/GetAllClientesUseCase";
+import { GetAllClientesUseCase } from "../../application/GetAllUseCase";
 
 export class GetAllClientesController {
   constructor(readonly getAllProductUseCase: GetAllClientesUseCase) {}
@@ -13,11 +13,8 @@ export class GetAllClientesController {
             return {
               id: cliente.id,
               nombre: cliente.nombre,
-              telefono: cliente.telefono,
-              invitados: cliente.invitados,
-              fecha: cliente.fecha,
-              evento: cliente.evento,
-              paquete: cliente.paquete 
+              password: cliente.password,
+              email: cliente.email
             };
           }),
         );

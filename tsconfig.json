@@ -11,12 +11,13 @@
     "noEmit": false,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
+    "skipLibCheck": true,
     "outDir": "./dist"
   },
   "include": [
     "src/**/**/**.ts",
     "tests/**/**.ts",
-    "playground/**/**.ts",
+    "playground/**/**.ts", "tests/dummy-test.js",
   ],
   "exclude": ["node_modules"]
 }

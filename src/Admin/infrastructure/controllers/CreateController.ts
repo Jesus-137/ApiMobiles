@@ -1,23 +1,19 @@
 import { Request, Response } from "express";
-import { CreateClientesUseCase } from "../../application/CreateClienteUseCase";
-import { MysqlClientesRepository } from "../MysqlClientesRepository";
+import { CreateClientesUseCase } from "../../application/CreateUseCase";
 
 export class CreateClienteController {
   constructor (
     readonly createClienteUseCase: CreateClientesUseCase,
-    readonly mysqlRepo: MysqlClientesRepository
     ) {}
 
   async run(req: Request, res: Response) {
     const data = req.body;
     try {
       const cliente = await this.createClienteUseCase.run(
+        data.id,
         data.nombre,
-        data.telefono,
-        data.invitados,
-        data.fecha,
-        data.evento,
-        data.paquete
+        data.password,
+        data.email
       );
       if (cliente){
         //Code HTTP : 201 -> Creado
@@ -26,11 +22,8 @@ export class CreateClienteController {
           data: {
             id: cliente.id,
             nombre: cliente.nombre,
-            telefono: cliente.telefono,
-            invitados: cliente.invitados,
-            fecha: cliente.fecha,
-            evento: cliente.evento,
-            paquete: cliente.paquete
+            password: cliente.password,
+            email: cliente.email,
           },
         });
         console.log('Registro exitoso')
