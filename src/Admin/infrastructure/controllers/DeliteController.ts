@@ -14,12 +14,7 @@ export class GetByIdClienteController {
         //Code HTTP : 200 -> Consulta exitosa
         res.status(200).send({
           status: "success",
-          data: {
-            id: cliente.id,
-            nombre: cliente.nombre,
-            password: cliente.password,
-            email: cliente.email
-          },
+          data: cliente,
         });
       else
         res.status(400).send({
