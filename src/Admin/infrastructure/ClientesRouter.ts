@@ -1,32 +1,31 @@
+// src/Clientes/infrastructure/ClientesRouter.ts
+
 import express from "express";
+import { createClienteController } from "./dependencies";
+import { getAllClientesController } from "./dependencies";
+import { getByIdClienteController } from "./dependencies";
+import { updateController } from "./dependencies";
+import { uploadController } from "./dependencies"; // Añadido
 
-import { createClienteController, createClienteControllerM } from "./dependencies";
-import { getAllClientesController, getAllClientesControllerM } from "./dependencies";
-import { getByIdClienteController, getByIdClienteControllerM } from "./dependencies";
+export const adminRouter = express.Router();
 
-export const clienteRouter = express.Router();
-
-clienteRouter.get(
+adminRouter.get(
   "/getAll",
   getAllClientesController.run.bind(getAllClientesController)
 );
-clienteRouter.get(
+adminRouter.delete(
   "/:id",
   getByIdClienteController.run.bind(getByIdClienteController)
 );
-clienteRouter.post(
+adminRouter.post(
   "/crear",
   createClienteController.run.bind(createClienteController)
 );
-clienteRouter.get(
-  "/mongo/getAll",
-  getAllClientesControllerM.run.bind(getAllClientesControllerM)
+adminRouter.put(
+  "/update",
+  updateController.run.bind(updateController)
 );
-clienteRouter.delete(
-  "/mongo/:id",
-  getByIdClienteControllerM.run.bind(getByIdClienteControllerM)
-);
-clienteRouter.post(
-  "/mongo/crear",
-  createClienteControllerM.run.bind(createClienteControllerM)
+adminRouter.post(
+  "/upload",
+  uploadController.run.bind(uploadController) // Añadido
 );

@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/cliente', clienteRouter);
+app.use('/admin', )
 
 const port = 3000;
 app.listen(port, () => {

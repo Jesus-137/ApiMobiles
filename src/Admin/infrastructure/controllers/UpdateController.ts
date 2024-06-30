@@ -1,44 +1,61 @@
-import { Request, Response } from "express";
-import { UpdateClientesUseCase } from "../../application/UpdateUseCase";
-import { MysqlClientesRepository } from "../adaptadores/MysqlClientesRepository";
+import { Request, Response } from 'express';
+import { UpdateClientesUseCase } from '../../application/UpdateUseCase';
+import { IStorageRepository } from '../../domain/repositories/IStorageRepository';
+import multer from 'multer';
 
-export class CreateClienteController {
-  constructor (
-    readonly createClienteUseCase: UpdateClientesUseCase,
-    readonly mysqlRepo: MysqlClientesRepository
-    ) {}
+const upload = multer({ storage: multer.memoryStorage() }); // Usar almacenamiento en memoria para Multer
+console.log(upload)
+
+export class UpdateController {
+  constructor(
+    private readonly updateClientesUseCase: UpdateClientesUseCase,
+    private readonly storageRepository: IStorageRepository
+  ) {}
 
   async run(req: Request, res: Response) {
     const data = req.body;
+    const file = req.file as Express.Multer.File;
+
     try {
-      const cliente = await this.createClienteUseCase.run(
+      const filePath = await this.storageRepository.upload(file);
+
+      if (!filePath) {
+        return res.status(500).send({
+          status: 'error',
+          data: 'Error al almacenar el archivo'
+        });
+      }
+
+      const cliente = await this.updateClientesUseCase.run(
         data.id,
-        data.nombre
+        data.nombre,
+        data.password,
+        data.email,
+        filePath
       );
-      if (cliente){
-        //Code HTTP : 201 -> Creado
-        res.status(201).send({
-          status: "success",
+
+      if (cliente) {
+        return res.status(201).send({
+          status: 'success',
           data: {
             id: cliente.id,
             nombre: cliente.nombre,
             password: cliente.password,
-            email: cliente.email,
-          },
+            filePath: filePath
+          }
         });
-        console.log('Registro exitoso')
+      } else {
+        return res.status(204).send({
+          status: 'error',
+          data: 'No fue posible actualizar el registro'
+        });
       }
-      else
-        res.status(204).send({
-          status: "error",
-          data: "NO fue posible agregar el registro",
-        });
     } catch (error) {
-      //Code HTTP : 204 Sin contenido
-      res.status(204).send({
-        status: "error",
-        data: "Ocurrio un error",
-        msn: error,
+      console.error('Error en la actualización:', error);
+      return res.status(500).send({
+        status: 'error',
+        data: 'Ocurrió un error en la actualización',
+        msn: error
       });
     }
   }
