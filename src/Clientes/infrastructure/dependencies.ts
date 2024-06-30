@@ -29,7 +29,7 @@ const storageRepository = process.env.STORAGE_ADAPTER === 's3'
 const createClienteController = new CreateClienteController(createClienteUseCase);
 const getAllClientesController = new GetAllClientesController(getAllUseCase);
 const getByIdClienteController = new GetByIdClienteController(getByIdClienteUseCase);
-const updateController = new UpdateController(updateUsecase, storageRepository);
+const updateController = new UpdateController(updateUsecase);
 const uploadController = new UploadController(storageRepository); // Añadido
 
 export {

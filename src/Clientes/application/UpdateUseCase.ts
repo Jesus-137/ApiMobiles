@@ -7,15 +7,13 @@ export class UpdateClientesUseCase {
   async run(
     id: number,
     nombre: string,
-    password: string,
-    filePath: string | null
+    password: string
   ): Promise<Users | null> {
     try {
       const result = await this.movimientoRepo.update(
         id,
         nombre,
-        password,
-        filePath
+        password
       );
       console.log(result);
       return result;

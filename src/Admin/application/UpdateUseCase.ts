@@ -8,16 +8,14 @@ export class UpdateClientesUseCase {
     id: number,
     nombre: string,
     password: string,
-    email: string,
-    filePath: string | null
+    email: string
   ): Promise<Admin | null> {
     try {
       const result = await this.movimientoRepo.update(
         id,
         nombre,
         password,
-        email,
-        filePath
+        email
       );
       console.log(result);
       return result;

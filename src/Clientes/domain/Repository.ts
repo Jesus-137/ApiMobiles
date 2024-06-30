@@ -11,7 +11,6 @@ export interface Repository {
   update(
     userId: number, 
     nombre: string,
-    password: string,
-    filePath: string | null
+    password: string
   ): Promise<Users|null>
 }

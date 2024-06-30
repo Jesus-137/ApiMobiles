@@ -13,7 +13,6 @@ export interface Repository {
     userId: number, 
     nombre: string,
     password: string,
-    email: string,
-    filePath: string | null
+    email: string
   ): Promise<Admin|null>
 }
