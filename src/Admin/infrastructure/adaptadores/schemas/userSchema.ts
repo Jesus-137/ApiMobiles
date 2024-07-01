@@ -14,4 +14,4 @@ const UserSchema = new Schema<IUserDocument>({
     email: { type: String, required: true }
 });
 
-export const UserModel = model<IUserDocument>('Users', UserSchema);
+export const UserModel = model<IUserDocument>('Admin', UserSchema);

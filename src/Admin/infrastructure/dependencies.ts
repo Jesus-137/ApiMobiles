@@ -1,6 +1,7 @@
 // src/Clientes/infrastructure/dependencies.ts
 
 import { MysqlClientesRepository } from './adaptadores/MysqlClientesRepository'; 
+import { MongoUserRepository } from './adaptadores/MongoRepo';
 import { S3StorageRepository } from './adaptadores/S3Repo'; 
 import { EC2StorageAdapter } from './adaptadores/EC2Repo';
 
@@ -15,7 +16,9 @@ import { GetByIdClienteController } from './controllers/DeliteController';
 import { UpdateController } from './controllers/UpdateController';
 import { UploadController } from './controllers/UploadController';
 
-const mysqlClientesRepository = new MysqlClientesRepository();
+const mysqlClientesRepository = process.env.REPO === 'mysql'
+  ? new MysqlClientesRepository()
+  : new MongoUserRepository();
 
 const createClienteUseCase = new CreateClientesUseCase(mysqlClientesRepository);
 const getAllUseCase = new GetAllClientesUseCase(mysqlClientesRepository);
