@@ -1,4 +1,4 @@
-import { Cliente } from "../domain/Cliente";
+import { Asesor } from "../domain/Asesor";
 import { Repository } from "../domain/Repository";
 
 export class CreateClientesUseCase {
@@ -9,7 +9,7 @@ export class CreateClientesUseCase {
     nombre: string,
     email: string,
     password: string
-  ): Promise<Cliente | null> {
+  ): Promise<Asesor | null> {
     try {
       const cliente = await this.movimientoRepo.createCliente(
         id,

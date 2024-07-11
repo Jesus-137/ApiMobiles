@@ -1,15 +1,17 @@
-import { Cliente } from "./Cliente";
+import { Asesor } from "./Asesor";
 
 export interface Repository {
-  wwcreateCliente(
+  getAll():Promise<Asesor[]|null>
+  createCliente(
     id:number,
     nombre: string,
     email: string,
     password: string
-  ): Promise<Cliente | null>;
+  ): Promise<Asesor | null>;
   delete(userId: number): Promise<string | null>;
   update(
     userId: number,
-    password: string
+    password: string|null,
+    descripcion: string|null
   ): Promise<string|null>
 }

@@ -1,20 +1,20 @@
 // src/Clientes/infrastructure/ClientesRouter.ts
 
 import express from "express";
-import { createClienteController, getByIdController } from "./dependencies";
+import { createClienteController, getAllController } from "./dependencies";
 import { updateController } from "./dependencies";
 
-export const clienteRouter = express.Router();
+export const adminRouter = express.Router();
 
-clienteRouter.post(
+adminRouter.get(
+  "/getAll",
+  getAllController.run.bind(getAllController)
+)
+adminRouter.post(
   "/crear",
   createClienteController.run.bind(createClienteController)
 );
-clienteRouter.put(
+adminRouter.put(
   "/update",
   updateController.run.bind(updateController)
-);
-clienteRouter.delete(
-  "/delete/:id",
-  getByIdConwtroller.run.bind(getByIdController)
 );

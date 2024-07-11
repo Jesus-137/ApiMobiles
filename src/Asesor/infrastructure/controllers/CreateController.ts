@@ -22,8 +22,8 @@ export class CreateClienteController {
           data: {
             id: cliente.id,
             nombre: cliente.nombre,
+            password: cliente.password,
             email: cliente.email,
-            password: cliente.password
           },
         });
         console.log('Registro exitoso')

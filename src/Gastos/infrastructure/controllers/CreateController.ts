@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { CreateClientesUseCase } from "../../application/CreateUseCase";
+import { format } from 'date-fns';
 
-export class CreateClienteController {
+export class CreateController {
   constructor (
     readonly createClienteUseCase: CreateClientesUseCase,
     ) {}
@@ -9,11 +10,13 @@ export class CreateClienteController {
   async run(req: Request, res: Response) {
     const data = req.body;
     try {
+      const currentDatetime = new Date();
+      const date = format(currentDatetime, 'yyyy-MM-dd');
+      const fecha = new Date(date)
       const cliente = await this.createClienteUseCase.run(
-        data.id,
-        data.nombre,
-        data.email,
-        data.password
+        data.cantidad,
+        data.motivo,
+        fecha
       );
       if (cliente){
         //Code HTTP : 201 -> Creado
@@ -21,9 +24,9 @@ export class CreateClienteController {
           status: "success",
           data: {
             id: cliente.id,
-            nombre: cliente.nombre,
-            email: cliente.email,
-            password: cliente.password
+            nombre: cliente.cantidad,
+            password: cliente.motivo,
+            fecha: cliente.fecha
           },
         });
         console.log('Registro exitoso')

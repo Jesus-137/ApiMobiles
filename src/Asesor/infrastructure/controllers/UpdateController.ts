@@ -14,9 +14,22 @@ export class UpdateController {
     const data = req.body;
 
     try {
+      let password;
+      let descripcion;
+      if (data.password!=''){
+        password = data.password
+      }else{
+        password = null
+      }
+      if (data.descripcion!=''){
+        descripcion=data.descripcion
+      }else{
+        descripcion=null
+      }
       const cliente = await this.updateClientesUseCase.run(
         data.id,
-        data.password,
+        password,
+        descripcion
       );
 
       if (cliente) {

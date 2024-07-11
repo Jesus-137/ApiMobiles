@@ -1,22 +1,23 @@
 // src/Clientes/infrastructure/dependencies.ts
 
 import { MysqlClientesRepository } from './adaptadores/MysqlClientesRepository';
-import { GetByIdClienteUseCase } from '../application/DeleteUseCase';
+import { GetAllUseCase } from '../application/GetAllUseCase';
 import { CreateClientesUseCase } from '../application/CreateUseCase';
 import { UpdateClientesUseCase } from '../application/UpdateUseCase';
-import { GetByIdClienteController } from './controllers/DeleteController';
+import { GetAllController } from './controllers/GetAllController';
 import { CreateClienteController } from './controllers/CreateController';
 import { UpdateController } from './controllers/UpdateController';
 
-const mysqlClientesRepository = new MysqlClientesRepository
-const getByIdUseCase = new GetByIdClienteUseCase(mysqlClientesRepository)
+const mysqlClientesRepository = new MysqlClientesRepository()
+const getAllUseCase = new GetAllUseCase(mysqlClientesRepository)
 const createClienteUseCase = new CreateClientesUseCase(mysqlClientesRepository);
 const updateUsecase = new UpdateClientesUseCase(mysqlClientesRepository);
+const getAllController = new GetAllController(getAllUseCase)
 const createClienteController = new CreateClienteController(createClienteUseCase);
 const updateController = new UpdateController(updateUsecase);
-const getByIdController = new GetByIdClienteController(getByIdUseCase)
+
 export {
   createClienteController,
   updateController,
-  getByIdController
+  getAllController
 };

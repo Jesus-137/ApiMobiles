@@ -1,17 +1,12 @@
+import { Gastos } from "../domain/Gastos";
 import { Repository } from "../domain/Repository";
 
-export class UpdateClientesUseCase {
+export class GetAllUseCase {
   constructor(readonly movimientoRepo: Repository) {}
 
-  async run(
-    id: number,
-    password: string
-  ): Promise<String | null> {
+  async run(): Promise<Gastos[] | null> {
     try {
-      const result = await this.movimientoRepo.update(
-        id,
-        password
-      );
+      const result = await this.movimientoRepo.getAll();
       console.log(result);
       return result;
     } catch (error) {
