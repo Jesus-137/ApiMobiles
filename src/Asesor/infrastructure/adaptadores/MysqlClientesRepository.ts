@@ -3,7 +3,19 @@ import { Asesor } from "../../domain/Asesor";
 import { Repository } from "../../domain/Repository";
 
 export class MysqlClientesRepository implements Repository {
-  w
+  async delete(userId: number): Promise<string | null> {
+    const sql = "DELETE FROM cliente where id=?";
+    const params: any[] = [userId];
+    try {
+      const [result]: any = await query(sql, params);
+      if(result.affectedRows==0){
+        return "Usuario no en contrado"
+      };
+      return 'Se eliminó correctamente'
+    } catch (error) {
+      return null;
+    }
+  }
 
   async update(userId: number, password: string|null, descripcion: string|null): Promise<string | null> {
     let sql

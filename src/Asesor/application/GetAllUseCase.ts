@@ -2,7 +2,7 @@ import { Asesor } from "../domain/Asesor";
 import { Repository } from "../domain/Repository";
 
 export class GetAllUseCase {
-  constructor(readonly movimientoRepo: Repwwwwwwwository) {}
+  constructor(readonly movimientoRepo: Repository) {}
 
   async run(): Promise<Asesor[] | null> {
     try {

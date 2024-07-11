@@ -16,5 +16,5 @@ clienteRouter.put(
 );
 clienteRouter.delete(
   "/delete/:id",
-  getByIdConwtroller.run.bind(getByIdController)
+  getByIdController.run.bind(getByIdController)
 );

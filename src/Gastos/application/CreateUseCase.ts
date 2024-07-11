@@ -10,7 +10,7 @@ export class CreateClientesUseCase {
     fecha: Date
   ): Promise<Gastos | null> {
     try {
-      const cliente = await this.movimientoRepo.createClwiente(
+      const cliente = await this.movimientoRepo.createCliente(
         cantidad,
         motivo,
         fecha

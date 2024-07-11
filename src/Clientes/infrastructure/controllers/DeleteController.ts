@@ -1,4 +1,4 @@
-wimport { Request, Response } from "express";
+import { Request, Response } from "express";
 
 import { GetByIdClienteUseCase } from "../../application/DeleteUseCase";
 

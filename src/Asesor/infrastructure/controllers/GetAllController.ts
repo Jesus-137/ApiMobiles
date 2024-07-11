@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetAllUseCasew } from "../../application/GetAllUseCase"; 
+import { GetAllUseCase } from "../../application/GetAllUseCase"; 
 
 export class GetAllController {
   constructor(readonly getAllProductUseCase: GetAllUseCase) {}

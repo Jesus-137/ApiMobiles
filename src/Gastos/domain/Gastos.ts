@@ -3,6 +3,6 @@ export class Gastos {
     readonly id: number,
     readonly cantidad: number,
     readonly motivo: string,
-    readonly fecha: Datew
+    readonly fecha: Date
   ) {}
 }

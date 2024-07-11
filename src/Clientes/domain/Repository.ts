@@ -1,7 +1,7 @@
 import { Cliente } from "./Cliente";
 
 export interface Repository {
-  wwcreateCliente(
+  createCliente(
     id:number,
     nombre: string,
     email: string,
