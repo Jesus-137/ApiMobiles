@@ -1,7 +1,7 @@
 // src/Clientes/infrastructure/ClientesRouter.ts
 
 import express from "express";
-import { createClienteController, getByIdController } from "./dependencies";
+import { createClienteController, getByIdController, loginController } from "./dependencies";
 import { updateController } from "./dependencies";
 
 export const clienteRouter = express.Router();
@@ -17,4 +17,8 @@ clienteRouter.put(
 clienteRouter.delete(
   "/delete/:id",
   getByIdController.run.bind(getByIdController)
+);
+clienteRouter.post(
+  "/login",
+  loginController.run.bind(loginController)
 );

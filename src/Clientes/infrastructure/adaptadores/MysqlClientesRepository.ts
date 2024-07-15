@@ -3,6 +3,23 @@ import { Cliente } from "../../domain/Cliente";
 import { Repository } from "../../domain/Repository";
 
 export class MysqlClientesRepository implements Repository {
+  async login(
+    email: string,
+    password: string
+  ): Promise<Cliente | null> {
+    const sql = "select * from cliente where email = ? and password = ?;";
+    const params: any[] = [email, password];
+    try {
+      const [result]: any = await query(sql, params);
+      if (result.len()===0){
+        return null
+      }
+      return new Cliente(result.insertId, result.nombre, email, password );
+    } catch (error) {
+      return null;
+    }
+  }
+
   async delete(userId: number): Promise<string | null> {
     const sql = "DELETE FROM cliente where id=?";
     const params: any[] = [userId];
@@ -36,8 +53,7 @@ export class MysqlClientesRepository implements Repository {
     email: string,
     password: string
   ): Promise<Cliente | null> {
-    const sql =
-"INSERT INTO cliente (nombre, email, password) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO cliente (nombre, email, password) VALUES (?, ?, ?)";
     const params: any[] = [nombre, email, password];
     console.log(id)
     try {

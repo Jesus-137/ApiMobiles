@@ -12,4 +12,8 @@ export interface Repository {
     userId: number,
     password: string
   ): Promise<string|null>
+  login(
+    email: string,
+    password: string
+  ): Promise<Cliente|null>
 }
