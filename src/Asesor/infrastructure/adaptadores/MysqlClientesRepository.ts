@@ -7,7 +7,7 @@ export class MysqlClientesRepository implements Repository {
     email: string,
     password: string
   ): Promise<Asesor | null> {
-    const sql = "select * from cliente where email = ? and password = ?;";
+    const sql = "select * from asesor where email = ? and password = ?;";
     const params: any[] = [email, password];
     try {
       const [result]: any = await query(sql, params);
@@ -21,7 +21,7 @@ export class MysqlClientesRepository implements Repository {
   }
 
   async delete(userId: number): Promise<string | null> {
-    const sql = "DELETE FROM cliente where id=?";
+    const sql = "DELETE FROM asesor where id=?";
     const params: any[] = [userId];
     try {
       const [result]: any = await query(sql, params);
