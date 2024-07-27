@@ -14,4 +14,8 @@ export interface Repository {
     password: string|null,
     descripcion: string|null
   ): Promise<string|null>
+  login(
+    email: string,
+    password: string
+  ): Promise<Asesor|null>
 }

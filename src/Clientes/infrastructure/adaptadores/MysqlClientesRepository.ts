@@ -11,7 +11,7 @@ export class MysqlClientesRepository implements Repository {
     const params: any[] = [email, password];
     try {
       const [result]: any = await query(sql, params);
-      if (result.len()===0){
+      if (result.length===0){
         return null
       }
       return new Cliente(result.insertId, result.nombre, email, password );

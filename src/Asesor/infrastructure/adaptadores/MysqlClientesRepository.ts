@@ -3,6 +3,23 @@ import { Asesor } from "../../domain/Asesor";
 import { Repository } from "../../domain/Repository";
 
 export class MysqlClientesRepository implements Repository {
+  async login(
+    email: string,
+    password: string
+  ): Promise<Asesor | null> {
+    const sql = "select * from cliente where email = ? and password = ?;";
+    const params: any[] = [email, password];
+    try {
+      const [result]: any = await query(sql, params);
+      if (result.length===0){
+        return null
+      }
+      return new Asesor(result.insertId, result.nombre, email, password, null);
+    } catch (error) {
+      return null;
+    }
+  }
+
   async delete(userId: number): Promise<string | null> {
     const sql = "DELETE FROM cliente where id=?";
     const params: any[] = [userId];
