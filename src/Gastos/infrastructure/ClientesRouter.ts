@@ -15,6 +15,6 @@ gastosRouter.get(
   getAllController.run.bind(getAllController)
 );
 gastosRouter.get(
-  "/getByFecha/:tipo/:w",
+  "/getByFecha/:tipo/:tiempo",
   getByFechaController.run.bind(getByFechaController)
 )
