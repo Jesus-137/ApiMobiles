@@ -11,10 +11,11 @@ export class MysqlClientesRepository implements Repository {
     const params: any[] = [email, password];
     try {
       const [result]: any = await query(sql, params);
+      console.log(result[0].id)
       if (result.length===0){
         return null
       }
-      return new Cliente(result.insertId, result.nombre, email, password );
+      return new Cliente(result[0].id, result[0].nombre, email, password );
     } catch (error) {
       return null;
     }
