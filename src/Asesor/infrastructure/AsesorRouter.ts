@@ -1,7 +1,7 @@
 // src/Clientes/infrastructure/ClientesRouter.ts
 
 import express from "express";
-import { createClienteController, getByIdController, loginController } from "./dependencies";
+import { createClienteController, getAllController, getByIdController, loginController } from "./dependencies";
 import { updateController } from "./dependencies";
 
 export const adminRouter = express.Router();
@@ -22,3 +22,7 @@ adminRouter.post(
   "/login",
   loginController.run.bind(loginController)
 );
+adminRouter.get(
+  "/getAll",
+  getAllController.run.bind(getAllController)
+)
