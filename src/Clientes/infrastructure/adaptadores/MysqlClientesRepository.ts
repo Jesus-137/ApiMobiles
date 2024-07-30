@@ -67,4 +67,23 @@ export class MysqlClientesRepository implements Repository {
       return null;
     }
   }
+
+  async getAll(): Promise<Cliente[] | null> {
+    const sql = "SELECT * FROM asesor";
+    try {
+      const [data]: any = await query(sql, []);
+      const clientes = Object.values(JSON.parse(JSON.stringify(data)));
+      return clientes.map(
+        (cliente: any) =>
+          new Cliente(
+            cliente.id,
+            cliente.nombre,
+            cliente.password,
+            cliente.email,
+          )
+      );
+    } catch (error) {
+      return null;
+    }
+  }
 }

@@ -2,7 +2,7 @@
 
 import express from "express";
 import { createClienteController, getByIdController, loginController } from "./dependencies";
-import { updateController } from "./dependencies";
+import { updateController, getAllController } from "./dependencies";
 
 export const clienteRouter = express.Router();
 
@@ -17,6 +17,10 @@ clienteRouter.put(
 clienteRouter.delete(
   "/delete/:id",
   getByIdController.run.bind(getByIdController)
+);
+clienteRouter.get(
+  '/getAll',
+  getAllController.run.bind(getAllController)
 );
 clienteRouter.post(
   "/login",

@@ -7,6 +7,7 @@ export interface Repository {
     email: string,
     password: string
   ): Promise<Cliente | null>;
+  getAll():Promise<Cliente[]|null>;
   delete(userId: number): Promise<string | null>;
   update(
     userId: number,
